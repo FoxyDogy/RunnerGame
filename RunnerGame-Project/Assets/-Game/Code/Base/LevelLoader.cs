@@ -7,6 +7,7 @@ namespace _Game.Code.Base
 {
     public class LevelLoader : MonoBehaviour
     {
+        //TODO: Data Config
         public bool autoLevelLoad=true;
         public string[] levels;
         public int loopLevel;

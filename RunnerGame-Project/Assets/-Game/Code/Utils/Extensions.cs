@@ -207,10 +207,9 @@ namespace Foxy.Utils
 
             return -1;
         }
-    }
+    
 
-    public static class LayerMaskExtensions
-    {
+
         public static LayerMask Create(params string[] layerNames)
         {
             return NamesToMask(layerNames);

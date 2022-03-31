@@ -9,6 +9,7 @@ namespace _Game.Code
         public void Interact(Action action = null)
         {
             CoinManager.Instance.AddCoin(1);
+            Destroy(gameObject);
         }
     }
 }

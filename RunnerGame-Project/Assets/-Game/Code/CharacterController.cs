@@ -1,5 +1,6 @@
 using System;
 using _Game.Code.Abstract;
+using Foxy.Utils;
 using UnityEngine;
 
 namespace _Game.Code
@@ -8,7 +9,8 @@ namespace _Game.Code
     public class CharacterController : MonoBehaviour
     {
         private UserInput userInput;
-        public float speed = 3;
+        public float speed = 3; // TODO data config
+        public Boundaries boundaries; //TODO: Data config
 
         private void Awake()
         {
@@ -18,6 +20,7 @@ namespace _Game.Code
         private void FixedUpdate()
         {
             transform.Translate(userInput.moveFactorX * speed * Time.deltaTime, 0, 0);
+            transform.position = transform.position.Clamp(boundaries);
         }
 
         private void OnTriggerEnter(Collider other)
@@ -34,7 +37,6 @@ namespace _Game.Code
 
         private void Dead()
         {
-            
         }
     }
 }
