@@ -1,4 +1,5 @@
 using System;
+using _Game.Code.Abstract;
 using UnityEngine;
 
 namespace _Game.Code
@@ -17,6 +18,23 @@ namespace _Game.Code
         private void FixedUpdate()
         {
             transform.Translate(userInput.moveFactorX * speed * Time.deltaTime, 0, 0);
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.TryGetComponent(out Iinteractable interactable))
+            {
+                interactable.Interact();
+                if (interactable is Obstacle)
+                {
+                    Dead();
+                }
+            }
+        }
+
+        private void Dead()
+        {
+            
         }
     }
 }
