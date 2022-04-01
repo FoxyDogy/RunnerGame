@@ -22,5 +22,6 @@ MonoBehaviour:
       ymax: Infinity
       zmin: -Infinity
       zmax: Infinity
+    lifeCount: 1
   currentUserData:
-    levelNo: 0
+    levelNo: 4

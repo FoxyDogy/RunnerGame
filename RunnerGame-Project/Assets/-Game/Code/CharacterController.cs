@@ -8,12 +8,6 @@ using UnityEngine;
 
 namespace _Game.Code
 {
-    public enum CharacterState
-    {
-        Stop,
-        Playing
-    }
-
     [RequireComponent(typeof(UserInput))]
     public class CharacterController : DataBehaviour<CharacterController>
     {
