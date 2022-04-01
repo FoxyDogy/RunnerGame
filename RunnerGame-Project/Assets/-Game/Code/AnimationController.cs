@@ -8,6 +8,7 @@ namespace _Game.Code
     public class AnimationController : MonoBehaviour
     {
         public Animator animator;
+        
         private void Awake()
         {
             if (animator == null)
@@ -20,6 +21,12 @@ namespace _Game.Code
         private void OnEnable()
         {
             GameController.Instance.onStartGame += OnStartGame;
+            CharacterController.Instance.onCollideObstacle += Hit;
+        }
+
+        private void Hit()
+        {
+            animator.SetTrigger("hit");
         }
 
         private void OnStartGame()

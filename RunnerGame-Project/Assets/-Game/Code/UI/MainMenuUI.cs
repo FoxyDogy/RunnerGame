@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace _Game.Code.UI
 {
-    public class MainMenuUI : MonoBehaviour
+    public class MainMenuUI : DataBehaviour
     {
         public GameObject content;
 
@@ -15,7 +15,7 @@ namespace _Game.Code.UI
         
         private void Update()
         {
-            if (Input.GetMouseButtonDown(0) && GameController.Instance.GameState == GameState.Boot)
+            if (Input.GetMouseButtonDown(0) && Data.GameState == GameState.Boot)
             {
                 GameController.Instance.StartGame(); // State Change to Game
             }

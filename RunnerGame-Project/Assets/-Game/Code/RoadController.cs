@@ -4,16 +4,22 @@ using UnityEngine;
 
 namespace _Game.Code
 {
-    public class RoadController : MonoBehaviour
+    public class RoadController : DataBehaviour<RoadController>
     {
-        public float speed = 5; // TODO: data config
-
         private void FixedUpdate()
         {
-            if (GameController.Instance.GameState == GameState.Game)
+            if (Data.GameState == GameState.Game)
             {
-                transform.Translate(0,0,-speed*Time.deltaTime);
+                transform.Translate(0, 0, -Data.config.forwardMovementSpeed * Time.deltaTime);
             }
+        }
+        public void Play()
+        {
+            enabled = true;
+        }
+        public void Stop()
+        {
+            enabled = false;
         }
     }
 }

@@ -13,19 +13,17 @@ namespace _Game.Code.Base
         Fail
     }
 
-    public class GameController : Singleton<GameController>
+    public class GameController : DataBehaviour<GameController>
     {
         private bool endGame;
-        public GameState GameState { get; private set; }
         public event Action<UserData> onBootGame;
         public event Action onBootGameCompleted;
         public event Action onStartGame;
         public event Action<bool> onEndGame;
-        public UserData currentUserData;
         private void Start()
         {
             Application.targetFrameRate = 165;
-            GameState = GameState.Boot;
+                Data.GameState = GameState.Boot;
             BootGame();
         }
         private void BootGame()
@@ -40,7 +38,7 @@ namespace _Game.Code.Base
 
         public void StartGame()
         {
-            GameState = GameState.Game;
+            Data.GameState= GameState.Game;
             onStartGame?.Invoke();
         }
         public void EndGame(bool state)
@@ -49,15 +47,15 @@ namespace _Game.Code.Base
 
             endGame = true;
             if (state)
-                GameState = GameState.Win;
+                Data.GameState = GameState.Win;
             else
-                GameState = GameState.Fail;
+                Data.GameState = GameState.Fail;
             onEndGame?.Invoke(state);
         }
 
         public void NextLevel()
         {
-            currentUserData.levelNo++;
+            Data.currentUserData.levelNo++;
             SaveUserData();
             SceneManager.LoadScene(0);
         }
@@ -69,15 +67,15 @@ namespace _Game.Code.Base
         
         private void SaveUserData()
         {
-            var json = JsonUtility.ToJson(currentUserData);
+            var json = JsonUtility.ToJson(Data.currentUserData);
             PlayerPrefs.SetString("UserData",json);
         }
         private UserData LoadUserData()
         {
             if (!PlayerPrefs.HasKey("UserData"))
             {
-                currentUserData = UserData.Defaults();
-                var jsonData = JsonUtility.ToJson(currentUserData);
+                Data.currentUserData = UserData.Defaults();
+                var jsonData = JsonUtility.ToJson(Data.currentUserData);
                 PlayerPrefs.SetString("UserData", jsonData);
             }
 
