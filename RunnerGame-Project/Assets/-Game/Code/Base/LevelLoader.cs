@@ -34,7 +34,7 @@ namespace _Game.Code.Base
                           loopLevel;
 
                 var levelName = levels[lvl];
-                StartCoroutine(LoadLevelIE(Path.Combine("LevelPrefabs", levelName)));
+                StartCoroutine(LoadLevelAsync(Path.Combine("LevelPrefabs", levelName)));
             }
             else
             {
@@ -42,7 +42,7 @@ namespace _Game.Code.Base
             }
         }
 
-        private IEnumerator LoadLevelIE(string path)
+        private IEnumerator LoadLevelAsync(string path)
         {
             var request = Resources.LoadAsync(path);
             yield return request;

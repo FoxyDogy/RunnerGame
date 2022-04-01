@@ -29,6 +29,7 @@ namespace _Game.Code.Base
         private void BootGame()
         {
             var userData = LoadUserData();
+            Data.currentUserData = userData;
             onBootGame?.Invoke(userData);
         }
         public void BootGameCompleted()

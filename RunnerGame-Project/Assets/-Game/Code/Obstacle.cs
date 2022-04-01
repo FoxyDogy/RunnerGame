@@ -9,7 +9,7 @@ namespace _Game.Code
     {
         public void Interact(Action action = null)
         {
-            CharacterController.Instance.CollideObstacle();
+            CharacterController.Instance.HitTheObstacle();
         }
     }
 }

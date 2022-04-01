@@ -17,16 +17,44 @@ namespace _Game.Code
     [RequireComponent(typeof(UserInput))]
     public class CharacterController : DataBehaviour<CharacterController>
     {
+        private int lifeCount;
+        public int LifeCount
+        {
+            get
+            {
+                return lifeCount;
+            }
+            private set
+            {
+                lifeCount = value;
+                onLifeUpdate?.Invoke(lifeCount);
+            }
+        }
+
         private UserInput userInput;
-        private float speed;
         public Action onCollideObstacle;
-        public Action onLossLife;
+        public Action<int> onLifeUpdate;
         private void Awake()
         {
             userInput = GetComponent<UserInput>();
-            speed = Data.config.forwardMovementSpeed;
         }
+
+        private void OnEnable()
+        {
+            GameController.Instance.onBootGameCompleted += BootGameCompleted;
+        }
+
+        private void BootGameCompleted()
+        {
+            LifeCount = Data.config.lifeCount;
+        }
+
         private void FixedUpdate()
+        {
+            Movement();
+        }
+        
+        private void Movement()
         {
             if (Data.GameState == GameState.Game)
             {
@@ -42,19 +70,22 @@ namespace _Game.Code
             }
         }
 
-        public void CollideObstacle()
-        {
-            StartCoroutine(StopMovement());
-            onCollideObstacle?.Invoke();
-            onLossLife?.Invoke();
-        }
-
         private IEnumerator StopMovement()
         {
-            //TODO: Dependencyi kaldir
+            //TOD: Dependencyi kaldir
             RoadController.Instance.Stop();
             yield return new WaitForSeconds(1);
             RoadController.Instance.Play();
+        }
+        public void HitTheObstacle()
+        {
+            LifeCount--;
+            onCollideObstacle?.Invoke();
+            StartCoroutine(StopMovement());
+            if (lifeCount<=0)
+            {
+                GameController.Instance.EndGame(false);
+            }
         }
     }
 }

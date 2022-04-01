@@ -21,7 +21,20 @@ namespace _Game.Code
         private void OnEnable()
         {
             GameController.Instance.onStartGame += OnStartGame;
+            GameController.Instance.onEndGame += EndGame;
             CharacterController.Instance.onCollideObstacle += Hit;
+        }
+
+        private void EndGame(bool obj)
+        {
+            if (obj)
+            {
+                animator.SetTrigger("win");
+            }
+            else
+            {
+                animator.SetTrigger("dead");
+            }
         }
 
         private void Hit()
