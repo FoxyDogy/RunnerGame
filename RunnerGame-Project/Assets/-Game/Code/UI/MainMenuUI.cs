@@ -2,6 +2,7 @@ using System;
 using _Game.Code.Base;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace _Game.Code.UI
 {
@@ -9,6 +10,8 @@ namespace _Game.Code.UI
     {
         public GameObject content;
         public TextMeshProUGUI levelText;
+        public TextMeshProUGUI coinText;
+
         private void Awake()
         {
             content.SetActive(true);
@@ -16,23 +19,29 @@ namespace _Game.Code.UI
 
         private void OnEnable()
         {
-            GameController.Instance.onBootGame += BootGame;
-            GameController.Instance.onStartGame += OnStartGame;
+            GameController.Instance.onBootGame += RefreshMenu;
+            GameController.Instance.onStartGame += HideMainMenuUI;
         }
 
-        private void BootGame(UserData userData)
+
+        private void RefreshMenu()
         {
-            levelText.text ="LEVEL " + (userData.levelNo + 1);
+            levelText.text = "LEVEL " + (Data.currentUserData.levelNo + 1);
+            coinText.text = Data.currentUserData.coinCount.ToString();
         }
 
         private void Update()
         {
-            if (Input.GetMouseButtonDown(0) && Data.GameState == GameState.Boot)
+            if (Data.GameState != GameState.Boot)
+                return;
+
+            if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
             {
                 GameController.Instance.StartGame(); // State Change to Game
             }
         }
-        private void OnStartGame()
+
+        private void HideMainMenuUI()
         {
             content.SetActive(false);
         }

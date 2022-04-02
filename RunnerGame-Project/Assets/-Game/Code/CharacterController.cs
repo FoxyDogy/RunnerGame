@@ -35,10 +35,10 @@ namespace _Game.Code
 
         private void OnEnable()
         {
-            GameController.Instance.onBootGameCompleted += BootGameCompleted;
+            GameController.Instance.onBootGameCompleted += GetCharacterValues;
         }
 
-        private void BootGameCompleted()
+        private void GetCharacterValues()
         {
             LifeCount = Data.config.lifeCount;
         }

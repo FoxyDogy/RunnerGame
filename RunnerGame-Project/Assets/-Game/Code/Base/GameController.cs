@@ -16,22 +16,25 @@ namespace _Game.Code.Base
     public class GameController : DataBehaviour<GameController>
     {
         private bool endGame;
-        public event Action<UserData> onBootGame;
+        public event Action onBootGame;
         public event Action onBootGameCompleted;
         public event Action onStartGame;
         public event Action<bool> onEndGame;
+
         private void Start()
         {
             Application.targetFrameRate = 165;
-                Data.GameState = GameState.Boot;
+            Data.GameState = GameState.Boot;
             BootGame();
         }
+
         private void BootGame()
         {
             var userData = LoadUserData();
             Data.currentUserData = userData;
-            onBootGame?.Invoke(userData);
+            onBootGame?.Invoke();
         }
+
         public void BootGameCompleted()
         {
             onBootGameCompleted?.Invoke();
@@ -39,9 +42,10 @@ namespace _Game.Code.Base
 
         public void StartGame()
         {
-            Data.GameState= GameState.Game;
+            Data.GameState = GameState.Game;
             onStartGame?.Invoke();
         }
+
         public void EndGame(bool state)
         {
             if (endGame) return;
@@ -51,13 +55,13 @@ namespace _Game.Code.Base
                 Data.GameState = GameState.Win;
             else
                 Data.GameState = GameState.Fail;
+
             onEndGame?.Invoke(state);
+            SaveUserData();
         }
 
         public void NextLevel()
         {
-            Data.currentUserData.levelNo++;
-            SaveUserData();
             SceneManager.LoadScene(0);
         }
 
@@ -65,12 +69,13 @@ namespace _Game.Code.Base
         {
             SceneManager.LoadScene(0);
         }
-        
-        private void SaveUserData()
+
+        public void SaveUserData()
         {
             var json = JsonUtility.ToJson(Data.currentUserData);
-            PlayerPrefs.SetString("UserData",json);
+            PlayerPrefs.SetString("UserData", json);
         }
+
         private UserData LoadUserData()
         {
             if (!PlayerPrefs.HasKey("UserData"))
@@ -82,18 +87,6 @@ namespace _Game.Code.Base
 
             var userDataJson = PlayerPrefs.GetString("UserData");
             return JsonUtility.FromJson<UserData>(userDataJson);
-        }
-    }
-    
-    [Serializable]
-    public struct UserData
-    {
-        public int levelNo;
-        public static UserData Defaults()
-        {
-            var defaultData = new UserData();
-            defaultData.levelNo = 0;
-            return defaultData;
         }
     }
 }

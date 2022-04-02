@@ -20,7 +20,7 @@ namespace _Game.Code
 
         private void OnEnable()
         {
-            GameController.Instance.onStartGame += OnStartGame;
+            GameController.Instance.onStartGame += Run;
             GameController.Instance.onEndGame += EndGame;
             CharacterController.Instance.onCollideObstacle += Hit;
         }
@@ -42,7 +42,7 @@ namespace _Game.Code
             animator.SetTrigger("hit");
         }
 
-        private void OnStartGame()
+        private void Run()
         {
             animator.SetTrigger("run");
         }

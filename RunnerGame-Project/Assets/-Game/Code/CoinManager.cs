@@ -1,24 +1,74 @@
 using System;
+using _Game.Code.Base;
 using _Game.Code.Utils;
 using UnityEngine;
 
 namespace _Game.Code
 {
-    public class CoinManager : Singleton<CoinManager>
+    public class CoinManager : DataBehaviour<CoinManager>
     {
-        public int coinCount;
-        public Action onSpendCoin;
-        public Action onAddCoin;
-        public void AddCoin(int count)
+        private int userCoinCount;
+        private int sessionCoinCount;
+        
+        public Action<int> onSessionCoinUpdate;
+        public Action<int> onUserCoinUpdate;
+        public Action onSpendUserCoin;
+        public int UserCoinCount
         {
-            coinCount += count;
-            onAddCoin?.Invoke();
+            get => userCoinCount;
+            set
+            {
+                userCoinCount = value;
+                Data.currentUserData.coinCount = userCoinCount;
+                onUserCoinUpdate?.Invoke(userCoinCount);
+            } 
+        }
+        public int SessionCoinCount
+        {
+            get => sessionCoinCount;
+            set
+            {
+                sessionCoinCount = value;
+                onSessionCoinUpdate?.Invoke(sessionCoinCount);
+            }
+        }
+        private void OnEnable()
+        {
+            GameController.Instance.onBootGame += GetUserCoin;
+            GameController.Instance.onEndGame += SetUserCoin;
+        }
+        private void GetUserCoin()
+        {
+            UserCoinCount = Data.currentUserData.coinCount;
         }
 
-        public void SpendCoin(int coin)
+        private void SetUserCoin(bool state)
         {
-            coinCount -= coin;
-            onSpendCoin?.Invoke();
+            if (state)
+            {
+                UserCoinCount += sessionCoinCount;
+            }
+        }
+        public void AddCoin(int count)
+        {
+            SessionCoinCount += count;
+        }
+
+        public bool SpendCoin(int cost)
+        {
+            if (SessionCoinCount>=cost)
+            {
+                UserCoinCount -= cost;
+                onSpendUserCoin?.Invoke();
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool CompareCost(int cost)
+        {
+            return SessionCoinCount >= cost;
         }
     }
 }

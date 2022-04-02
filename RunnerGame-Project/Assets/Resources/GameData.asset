@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: GameData
   m_EditorClassIdentifier: 
   config:
-    inputSensitivity: 5
+    inputSensitivity: 8
     forwardMovementSpeed: 5
+    lifeCount: 3
+    gemValuePerPiece: 1
     boundaries:
       xmin: -1.5
       xmax: 1.5
@@ -22,6 +24,13 @@ MonoBehaviour:
       ymax: Infinity
       zmin: -Infinity
       zmax: Infinity
-    lifeCount: 1
+    upgradeData:
+      gemUpgradeCosts: 
+      lifeUpgradeCosts: 
+      gemUpgrades: 
+      lifeUpgrades: 
   currentUserData:
-    levelNo: 4
+    levelNo: 53
+    coinCount: 206
+    gemUpgradeLevel: 0
+    lifeUpgradeLevel: 0

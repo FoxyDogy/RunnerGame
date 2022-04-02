@@ -5,26 +5,26 @@ using UnityEngine;
 
 namespace _Game.Code.Base
 {
-    public class LevelLoader : MonoBehaviour
+    public class LevelLoader : DataBehaviour
     {
-        //TODO: Data Config
         public bool autoLevelLoad=true;
         public string[] levels;
         public int loopLevel;
         public GameObject levelGo;
         private void OnEnable()
         {
-            GameController.Instance.onBootGame += BootGame;
+            GameController.Instance.onBootGame += LoadLevel;
+            GameController.Instance.onEndGame += IncreaseLevelNumber;
         }
 
-        private void BootGame(UserData obj)
+        private void IncreaseLevelNumber(bool obj)
         {
-            var level = obj.levelNo;
-            LoadLevel(level);
+            Data.currentUserData.levelNo++;
         }
-
-        public void LoadLevel(int levelNo)
+        
+        public void LoadLevel()
         {
+            var levelNo = Data.currentUserData.levelNo;
             if (autoLevelLoad)
             {
                 var lvl = levelNo;
