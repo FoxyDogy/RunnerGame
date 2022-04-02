@@ -20,6 +20,7 @@ namespace _Game.Code.UI
         private void OnEnable()
         {
             GameController.Instance.onBootGame += RefreshMenu;
+            CoinManager.Instance.onUserCoinUpdate += RefreshMenu;
             GameController.Instance.onStartGame += HideMainMenuUI;
         }
 

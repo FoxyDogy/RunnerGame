@@ -15,9 +15,7 @@ MonoBehaviour:
   config:
     inputSensitivity: 8
     forwardMovementSpeed: 5
-    lifeCount: 3
-    gemValuePerPiece: 1
-    boundaries:
+    movementBoundaries:
       xmin: -1.5
       xmax: 1.5
       ymin: -Infinity
@@ -25,12 +23,12 @@ MonoBehaviour:
       zmin: -Infinity
       zmax: Infinity
     upgradeData:
-      gemUpgradeCosts: 
-      lifeUpgradeCosts: 
-      gemUpgrades: 
-      lifeUpgrades: 
+      gemUpgradeCosts: 0a000000140000001e00000028000000
+      lifeUpgradeCosts: 0a000000140000001e0000002800000032000000
+      gemUpgrades: 01000000020000000400000008000000
+      lifeUpgrades: 0300000004000000050000000600000007000000
   currentUserData:
-    levelNo: 53
-    coinCount: 206
-    gemUpgradeLevel: 0
-    lifeUpgradeLevel: 0
+    levelNo: 5
+    coinCount: 0
+    gemUpgradeLevel: 3
+    lifeUpgradeLevel: 1

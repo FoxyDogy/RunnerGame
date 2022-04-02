@@ -9,7 +9,8 @@ namespace _Game.Code
     {
         public void Interact(Action action = null)
         {
-            CoinManager.Instance.AddCoin(Data.config.gemValuePerPiece);
+            var gemValuePerPiece = Data.GetGemValue(Data.currentUserData.gemUpgradeLevel);
+            CoinManager.Instance.AddCoin(gemValuePerPiece);
             Destroy(gameObject);
         }
     }

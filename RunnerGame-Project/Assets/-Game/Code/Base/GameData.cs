@@ -1,6 +1,7 @@
 using System;
 using Foxy.Utils;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _Game.Code.Base
 
@@ -35,9 +36,7 @@ namespace _Game.Code.Base
     {
         public float inputSensitivity = 3;
         public float forwardMovementSpeed = 5;
-        public int lifeCount = 3;
-        public int gemValuePerPiece=1;
-        public Boundaries boundaries;
+        [FormerlySerializedAs("boundaries")] public Boundaries movementBoundaries;
         public UpgradeData upgradeData;
     }
 
@@ -61,7 +60,7 @@ namespace _Game.Code.Base
         {
             var defaultData = new UserData();
             defaultData.levelNo = 0;
-            defaultData.coinCount = 10;
+            defaultData.coinCount = 1000;
             defaultData.gemUpgradeLevel = 0;
             defaultData.lifeUpgradeLevel = 0;
             return defaultData;

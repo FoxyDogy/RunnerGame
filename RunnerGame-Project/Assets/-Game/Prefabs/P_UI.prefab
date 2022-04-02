@@ -282,7 +282,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 0.44705883}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -625,7 +625,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1438,7 +1438,6 @@ GameObject:
   - component: {fileID: 4319262164094062365}
   - component: {fileID: 1383218928155267246}
   - component: {fileID: 7518980271746467529}
-  - component: {fileID: 5214158698047102960}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1512,23 +1511,6 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 0
---- !u!114 &5214158698047102960
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1885295504578896909}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!1 &2028843838196898387
 GameObject:
   m_ObjectHideFlags: 0
@@ -1958,7 +1940,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2107,7 +2089,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2328,6 +2310,7 @@ GameObject:
   - component: {fileID: 1389944421234233696}
   - component: {fileID: 854560582387656535}
   - component: {fileID: 3698890062529718065}
+  - component: {fileID: 1487214481}
   m_Layer: 5
   m_Name: UpgradeButton (1)
   m_TagString: Untagged
@@ -2439,6 +2422,23 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1487214481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3757070263983785752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de3e5ef1f0ba4f648df383e4010e2de9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 0
+  cost: 0
+  upgradeType: 0
+  levelText: {fileID: 2845282327378608138}
+  costText: {fileID: 5323648951209892674}
 --- !u!1 &4366465332428204143
 GameObject:
   m_ObjectHideFlags: 0
@@ -2451,6 +2451,7 @@ GameObject:
   - component: {fileID: 7889950476062229111}
   - component: {fileID: 5478001481940108808}
   - component: {fileID: 7105979723087751798}
+  - component: {fileID: 1906194856}
   m_Layer: 5
   m_Name: UpgradeButton
   m_TagString: Untagged
@@ -2562,6 +2563,23 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1906194856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4366465332428204143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de3e5ef1f0ba4f648df383e4010e2de9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 0
+  cost: 0
+  upgradeType: 1
+  levelText: {fileID: 5781048047498803968}
+  costText: {fileID: 3061503251226973264}
 --- !u!1 &4466347333321138428
 GameObject:
   m_ObjectHideFlags: 0
@@ -3909,7 +3927,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 0.44705883}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -3984,7 +4002,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

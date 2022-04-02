@@ -40,7 +40,7 @@ namespace _Game.Code
 
         private void GetCharacterValues()
         {
-            LifeCount = Data.config.lifeCount;
+            LifeCount = Data.GetLifeCount(Data.currentUserData.lifeUpgradeLevel);
         }
 
         private void FixedUpdate()
@@ -53,7 +53,7 @@ namespace _Game.Code
             if (Data.GameState == GameState.Game)
             {
                 transform.Translate(userInput.moveFactorX * Data.config.inputSensitivity * Time.deltaTime, 0,0);
-                transform.position = transform.position.Clamp(Data.config.boundaries);
+                transform.position = transform.position.Clamp(Data.config.movementBoundaries);
             }
         }
         private void OnTriggerEnter(Collider other)

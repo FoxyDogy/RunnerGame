@@ -11,7 +11,7 @@ namespace _Game.Code
         private int sessionCoinCount;
         
         public Action<int> onSessionCoinUpdate;
-        public Action<int> onUserCoinUpdate;
+        public Action onUserCoinUpdate;
         public Action onSpendUserCoin;
         public int UserCoinCount
         {
@@ -20,7 +20,7 @@ namespace _Game.Code
             {
                 userCoinCount = value;
                 Data.currentUserData.coinCount = userCoinCount;
-                onUserCoinUpdate?.Invoke(userCoinCount);
+                onUserCoinUpdate?.Invoke();
             } 
         }
         public int SessionCoinCount
@@ -56,10 +56,11 @@ namespace _Game.Code
 
         public bool SpendCoin(int cost)
         {
-            if (SessionCoinCount>=cost)
+            if (UserCoinCount>=cost)
             {
                 UserCoinCount -= cost;
                 onSpendUserCoin?.Invoke();
+                GameController.Instance.SaveUserData();
                 return true;
             }
 
