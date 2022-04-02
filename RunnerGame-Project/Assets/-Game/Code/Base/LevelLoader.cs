@@ -1,16 +1,16 @@
 using System.Collections;
 using System.IO;
-using _Game.Code.Utils;
 using UnityEngine;
 
 namespace _Game.Code.Base
 {
     public class LevelLoader : DataBehaviour
     {
-        public bool autoLevelLoad=true;
+        public bool autoLevelLoad = true;
         public string[] levels;
         public int loopLevel;
         public GameObject levelGo;
+
         private void OnEnable()
         {
             GameController.Instance.onBootGame += LoadLevel;
@@ -21,7 +21,7 @@ namespace _Game.Code.Base
         {
             Data.currentUserData.levelNo++;
         }
-        
+
         public void LoadLevel()
         {
             var levelNo = Data.currentUserData.levelNo;

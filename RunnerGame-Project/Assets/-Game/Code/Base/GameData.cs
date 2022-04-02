@@ -1,7 +1,6 @@
 using System;
 using Foxy.Utils;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace _Game.Code.Base
 
@@ -9,22 +8,25 @@ namespace _Game.Code.Base
     [CreateAssetMenu(fileName = "GameData", menuName = "Foxy/GameData", order = 0)]
     public class GameData : ScriptableObject
     {
-        public GameState GameState { get; set; }
         public Config config;
         public UserData currentUserData;
+        public GameState GameState { get; set; }
 
         public int GetGemValue(int level)
         {
             return config.upgradeData.gemUpgrades[level];
         }
+
         public int GetLifeCount(int level)
         {
             return config.upgradeData.lifeUpgrades[level];
         }
+
         public int GetCostGemValue(int level)
         {
             return config.upgradeData.gemUpgradeCosts[level];
         }
+
         public int GetCostLifeCount(int level)
         {
             return config.upgradeData.lifeUpgradeCosts[level];
@@ -36,7 +38,7 @@ namespace _Game.Code.Base
     {
         public float inputSensitivity = 3;
         public float forwardMovementSpeed = 5;
-        [FormerlySerializedAs("boundaries")] public Boundaries movementBoundaries;
+        public Boundaries movementBoundaries;
         public UpgradeData upgradeData;
     }
 
@@ -48,7 +50,7 @@ namespace _Game.Code.Base
         public int[] gemUpgrades;
         public int[] lifeUpgrades;
     }
-    
+
     [Serializable]
     public struct UserData
     {
@@ -56,11 +58,12 @@ namespace _Game.Code.Base
         public int coinCount;
         public int gemUpgradeLevel;
         public int lifeUpgradeLevel;
+
         public static UserData Defaults()
         {
             var defaultData = new UserData();
             defaultData.levelNo = 0;
-            defaultData.coinCount = 1000;
+            defaultData.coinCount = 10;
             defaultData.gemUpgradeLevel = 0;
             defaultData.lifeUpgradeLevel = 0;
             return defaultData;

@@ -1,4 +1,3 @@
-using System;
 using _Game.Code.Base;
 using TMPro;
 using UnityEngine;
@@ -17,6 +16,15 @@ namespace _Game.Code.UI
             content.SetActive(true);
         }
 
+        private void Update()
+        {
+            if (Data.GameState != GameState.Boot)
+                return;
+
+            if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+                GameController.Instance.StartGame(); // State Change to Game
+        }
+
         private void OnEnable()
         {
             GameController.Instance.onBootGame += RefreshMenu;
@@ -29,17 +37,6 @@ namespace _Game.Code.UI
         {
             levelText.text = "LEVEL " + (Data.currentUserData.levelNo + 1);
             coinText.text = Data.currentUserData.coinCount.ToString();
-        }
-
-        private void Update()
-        {
-            if (Data.GameState != GameState.Boot)
-                return;
-
-            if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
-            {
-                GameController.Instance.StartGame(); // State Change to Game
-            }
         }
 
         private void HideMainMenuUI()

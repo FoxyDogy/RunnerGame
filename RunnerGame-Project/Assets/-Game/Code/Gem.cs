@@ -1,7 +1,6 @@
 using System;
 using _Game.Code.Abstract;
 using _Game.Code.Base;
-using UnityEngine;
 
 namespace _Game.Code
 {

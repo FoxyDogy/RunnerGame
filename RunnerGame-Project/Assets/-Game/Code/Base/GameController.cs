@@ -1,5 +1,4 @@
 using System;
-using _Game.Code.Utils;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,10 +15,6 @@ namespace _Game.Code.Base
     public class GameController : DataBehaviour<GameController>
     {
         private bool endGame;
-        public event Action onBootGame;
-        public event Action onBootGameCompleted;
-        public event Action onStartGame;
-        public event Action<bool> onEndGame;
 
         private void Start()
         {
@@ -27,6 +22,11 @@ namespace _Game.Code.Base
             Data.GameState = GameState.Boot;
             BootGame();
         }
+
+        public event Action onBootGame;
+        public event Action onBootGameCompleted;
+        public event Action onStartGame;
+        public event Action<bool> onEndGame;
 
         private void BootGame()
         {

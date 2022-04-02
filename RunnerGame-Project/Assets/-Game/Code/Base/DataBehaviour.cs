@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace _Game.Code.Base
 {
-    public class DataBehaviour<T> : MonoBehaviour  where T : MonoBehaviour
+    public class DataBehaviour<T> : MonoBehaviour where T : MonoBehaviour
     {
         private static T instance;
 
@@ -27,16 +27,17 @@ namespace _Game.Code.Base
             }
         }
 
-     
+
         public void InspectorInit()
         {
             gameData = Resources.Load<GameData>("GameData");
         }
     }
-    public class DataBehaviour: MonoBehaviour
+
+    public class DataBehaviour : MonoBehaviour
     {
         private GameData gameData;
-        
+
         internal GameData Data
         {
             get
@@ -47,7 +48,7 @@ namespace _Game.Code.Base
             }
         }
 
-     
+
         public void InspectorInit()
         {
             gameData = Resources.Load<GameData>("GameData");

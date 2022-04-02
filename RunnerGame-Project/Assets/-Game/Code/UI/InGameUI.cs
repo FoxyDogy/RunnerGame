@@ -1,4 +1,3 @@
-using System;
 using _Game.Code.Base;
 using TMPro;
 using UnityEngine;

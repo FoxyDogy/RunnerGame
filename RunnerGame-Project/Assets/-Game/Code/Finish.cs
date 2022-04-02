@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace _Game.Code
 {
-    public class Finish : MonoBehaviour,Iinteractable
+    public class Finish : MonoBehaviour, Iinteractable
     {
         public void Interact(Action action = null)
         {

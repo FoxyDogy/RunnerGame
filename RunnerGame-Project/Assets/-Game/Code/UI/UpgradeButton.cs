@@ -1,4 +1,3 @@
-using System;
 using _Game.Code.Base;
 using TMPro;
 using UnityEngine;
@@ -15,13 +14,13 @@ namespace _Game.Code.UI
     [RequireComponent(typeof(Button))]
     public class UpgradeButton : DataBehaviour
     {
-        private Button button;
-        private int level;
-        private int maxLevel;
-        private int cost;
         public UpgradeType upgradeType;
         public TextMeshProUGUI levelText;
         public TextMeshProUGUI costText;
+        private Button button;
+        private int cost;
+        private int level;
+        private int maxLevel;
 
         private void Awake()
         {

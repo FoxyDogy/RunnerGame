@@ -1,4 +1,3 @@
-using System;
 using _Game.Code.Base;
 using TMPro;
 using UnityEngine;
@@ -15,6 +14,7 @@ namespace _Game.Code.UI
         public GameObject failGroup;
         public Button nextLevelButton;
         public Button retryLevelButton;
+
         private void Awake()
         {
             ButtonsInit();
@@ -32,22 +32,20 @@ namespace _Game.Code.UI
         {
             nextLevelButton.onClick.RemoveAllListeners();
             retryLevelButton.onClick.RemoveAllListeners();
-            
+
             nextLevelButton.onClick.AddListener(NextLevelClick);
             retryLevelButton.onClick.AddListener(RetryLevelClick);
         }
+
         private void ShowEndGameUI(bool obj)
         {
             sessionCoinText.text = CoinManager.Instance.SessionCoinCount.ToString();
             userCoinText.text = CoinManager.Instance.UserCoinCount.ToString();
-            
+
             content.SetActive(true);
             winGroup.SetActive(obj);
             failGroup.SetActive(!obj);
-            if (obj)
-            {
-                CoinAnimation();
-            }
+            if (obj) CoinAnimation();
         }
 
         public void CoinAnimation()
@@ -55,6 +53,7 @@ namespace _Game.Code.UI
             sessionCoinText.text = CoinManager.Instance.SessionCoinCount.ToString();
             userCoinText.text = CoinManager.Instance.UserCoinCount.ToString();
         }
+
         private void NextLevelClick()
         {
             GameController.Instance.NextLevel();
