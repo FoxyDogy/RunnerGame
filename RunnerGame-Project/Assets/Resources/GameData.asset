@@ -26,9 +26,9 @@ MonoBehaviour:
       gemUpgradeCosts: 0a000000140000001e00000028000000
       lifeUpgradeCosts: 0a000000140000001e0000002800000032000000
       gemUpgrades: 01000000020000000400000008000000
-      lifeUpgrades: 0300000004000000050000000600000007000000
+      lifeUpgrades: 0100000004000000050000000600000007000000
   currentUserData:
-    levelNo: 2
-    coinCount: 936
-    gemUpgradeLevel: 3
-    lifeUpgradeLevel: 4
+    levelNo: 12
+    coinCount: 10
+    gemUpgradeLevel: 0
+    lifeUpgradeLevel: 0
