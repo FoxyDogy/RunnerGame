@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using _Game.Code.Base;
+using _Game.Code.Utils;
 using Foxy.Utils;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -12,10 +13,12 @@ namespace _Game.Code
         public MeshRenderer groundMesh;
         public List<GameObject> collectables;
         public List<GameObject> gems;
-
+        private bool endlessMode;
         private void Awake()
         {
             Init();
+            endlessMode = PlayerPrefsX.GetBool("endlessMode", false);
+
         }
 
         public void Init()
@@ -44,7 +47,7 @@ namespace _Game.Code
         }
         private void Update()
         {
-            if (!Data.currentUserData.endlessMode)
+            if (!endlessMode)
             {
                 return;
             }

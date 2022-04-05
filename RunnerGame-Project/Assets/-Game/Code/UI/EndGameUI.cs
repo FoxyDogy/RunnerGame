@@ -1,5 +1,6 @@
 using System.Collections;
 using _Game.Code.Base;
+using _Game.Code.Utils;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,13 +18,15 @@ namespace _Game.Code.UI
         public GameObject failGroup;
         public Button nextLevelButton;
         public Button retryLevelButton;
-
+        private bool endlessMode;
         private void Awake()
         {
             ButtonsInit();
             content.SetActive(false);
             winGroup.SetActive(false);
             failGroup.SetActive(false);
+                  endlessMode = PlayerPrefsX.GetBool("endlessMode", false);
+
         }
 
         private void OnEnable()
@@ -45,9 +48,9 @@ namespace _Game.Code.UI
             sessionCoinText.text = CoinManager.Instance.SessionCoinCount.ToString();
             userCoinText.text = CoinManager.Instance.UserCoinCount.ToString();
             content.SetActive(true);
-            winGroup.SetActive(obj);
-            failGroup.SetActive(!obj);
-            if (obj || Data.currentUserData.endlessMode)
+            winGroup.SetActive(obj || endlessMode);
+            failGroup.SetActive(!(obj || endlessMode));
+            if (obj || endlessMode)
             {
                 StartCoroutine( CoinAnimation());
                 youEarnLostText.text = "YOU EARN";

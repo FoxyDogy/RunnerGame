@@ -60,7 +60,7 @@ namespace _Game.Code.Base
         public int coinCount;
         public int gemUpgradeLevel;
         public int lifeUpgradeLevel;
-        public bool endlessMode;
+  
         public static UserData Defaults()
         {
             var defaultData = new UserData();
