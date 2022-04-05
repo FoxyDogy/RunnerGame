@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using _Game.Code.Abstract;
 using _Game.Code.Base;
 using UnityEngine;
@@ -10,15 +9,21 @@ namespace _Game.Code
     public class Gem : DataBehaviour, Iinteractable
     {
         public ParticleSystem collectParticle;
-        private Vector3 startPosition;
 
         private float k;
+        private Vector3 startPosition;
 
         private void Awake()
         {
             startPosition = transform.position;
 
             k = Random.Range(0.1f, 0.2f);
+        }
+
+
+        private void Update()
+        {
+            Animation();
         }
 
         public void Interact(Action action = null)
@@ -29,12 +34,6 @@ namespace _Game.Code
             collectParticle.transform.SetParent(null);
             Destroy(gameObject);
             Destroy(collectParticle.gameObject, 1);
-        }
-
-
-        private void Update()
-        {
-            Animation();
         }
 
         public void Animation()

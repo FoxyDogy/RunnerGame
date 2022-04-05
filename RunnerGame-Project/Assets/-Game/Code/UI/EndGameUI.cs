@@ -19,6 +19,7 @@ namespace _Game.Code.UI
         public Button nextLevelButton;
         public Button retryLevelButton;
         private bool endlessMode;
+
         private void Awake()
         {
             ButtonsInit();
@@ -26,15 +27,11 @@ namespace _Game.Code.UI
             winGroup.SetActive(false);
             failGroup.SetActive(false);
             endlessMode = PlayerPrefsX.GetBool("endlessMode", false);
-
         }
 
         private void OnEnable()
         {
-            GameController.Instance.onEndGame += delegate(bool b)
-            {
-                StartCoroutine(ShowEndGameUI(b));
-            }; 
+            GameController.Instance.onEndGame += delegate(bool b) { StartCoroutine(ShowEndGameUI(b)); };
         }
 
         private void ButtonsInit()
@@ -55,7 +52,7 @@ namespace _Game.Code.UI
             failGroup.SetActive(!obj);
             if (obj || endlessMode)
             {
-                StartCoroutine( CoinAnimation());
+                StartCoroutine(CoinAnimation());
                 youEarnLostText.text = "YOU EARN";
             }
             else
@@ -67,9 +64,9 @@ namespace _Game.Code.UI
         private IEnumerator CoinAnimation()
         {
             yield return new WaitForSeconds(1);
-            sessionCoinText.GetComponent<NumberCounter>().SetNumber(0,0.5f);
+            sessionCoinText.GetComponent<NumberCounter>().SetNumber(0, 0.5f);
             var userCoinTargetNumber = CoinManager.Instance.SessionCoinCount + CoinManager.Instance.UserCoinCount;
-            userCoinText.GetComponent<NumberCounter>().SetNumber(userCoinTargetNumber,0.5f);
+            userCoinText.GetComponent<NumberCounter>().SetNumber(userCoinTargetNumber, 0.5f);
             yield return new WaitForSeconds(1.5f);
             StartCoroutine(FadeSessionCoins(0, 1));
         }
@@ -77,7 +74,7 @@ namespace _Game.Code.UI
         private IEnumerator FadeSessionCoins(float end, float duration)
         {
             float counter = 0;
-            while (counter<duration)
+            while (counter < duration)
             {
                 counter += Time.fixedDeltaTime;
                 sessionCoinsParent.alpha -= Mathf.Lerp(counter, end, counter / duration);
@@ -94,6 +91,5 @@ namespace _Game.Code.UI
         {
             GameController.Instance.RestartGame();
         }
-        
     }
 }

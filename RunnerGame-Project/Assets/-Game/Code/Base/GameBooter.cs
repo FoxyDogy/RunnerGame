@@ -1,5 +1,4 @@
 using _Game.Code.Utils;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace _Game.Code.Base
@@ -11,13 +10,9 @@ namespace _Game.Code.Base
             var endlessMode = PlayerPrefsX.GetBool("endlessMode", false);
 
             if (endlessMode)
-            {
                 SceneManager.LoadScene(2);
-            }
             else
-            {
                 SceneManager.LoadScene(1);
-            }
         }
     }
 }

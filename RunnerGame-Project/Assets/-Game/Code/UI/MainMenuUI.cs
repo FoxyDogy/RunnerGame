@@ -1,4 +1,3 @@
-using System.Collections;
 using _Game.Code.Base;
 using _Game.Code.Utils;
 using TMPro;
@@ -23,14 +22,6 @@ namespace _Game.Code.UI
             endlessMode = PlayerPrefsX.GetBool("endlessMode", false);
         }
 
-        private void OnEnable()
-        {
-            GameController.Instance.onBootGameCompleted += RefreshMenu;
-            GameController.Instance.onStartGame += HideMainMenuUI;
-            CoinManager.Instance.onUserCoinUpdate += RefreshMenu;
-            endlessButton.onClick.AddListener(EndlessButtonClick);
-        }
-
 
         private void Update()
         {
@@ -39,6 +30,14 @@ namespace _Game.Code.UI
 
             if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject() && content.activeSelf)
                 GameController.Instance.StartGame(); // State Change to Game
+        }
+
+        private void OnEnable()
+        {
+            GameController.Instance.onBootGameCompleted += RefreshMenu;
+            GameController.Instance.onStartGame += HideMainMenuUI;
+            CoinManager.Instance.onUserCoinUpdate += RefreshMenu;
+            endlessButton.onClick.AddListener(EndlessButtonClick);
         }
 
         private void EndlessButtonClick()
@@ -50,15 +49,10 @@ namespace _Game.Code.UI
 
         private void RefreshMenu()
         {
-        
             if (!endlessMode)
-            {
                 levelText.text = "LEVEL " + (Data.currentUserData.levelNo + 1);
-            }
             else
-            {
                 levelText.text = "ENDLESS";
-            }
 
             coinText.text = Data.currentUserData.coinCount.ToString();
         }

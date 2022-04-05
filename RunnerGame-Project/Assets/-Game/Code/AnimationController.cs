@@ -17,10 +17,7 @@ namespace _Game.Code
         private void OnEnable()
         {
             GameController.Instance.onStartGame += Run;
-            GameController.Instance.onEndGame += delegate(bool b)
-            {
-                StartCoroutine(EndGame(b));
-            };
+            GameController.Instance.onEndGame += delegate(bool b) { StartCoroutine(EndGame(b)); };
             CharacterController.Instance.onCollideObstacle += Hit;
         }
 

@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using _Game.Code.Base;
 using UnityEngine;
@@ -18,39 +17,35 @@ namespace _Game.Code
         private void CameraChangeState(bool state)
         {
             var target = game;
-            if (state)
-            {
-                target = cinematic;
-            }
+            if (state) target = cinematic;
 
             StartCoroutine(SmoothMove(target.position, 1f));
             StartCoroutine(SmoothRotate(target.rotation, 1f));
-
         }
-        private IEnumerator SmoothMove (Vector3 target,float duration)
+
+        private IEnumerator SmoothMove(Vector3 target, float duration)
         {
-       
-            Vector3 startingPos  = transform.position;
-            Vector3 finalPos = target;
+            var startingPos = transform.position;
+            var finalPos = target;
             float elapsedTime = 0;
-         
+
             while (elapsedTime < duration)
             {
-                transform.position = Vector3.Lerp(startingPos, finalPos, (elapsedTime / duration));
+                transform.position = Vector3.Lerp(startingPos, finalPos, elapsedTime / duration);
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
         }
-        private IEnumerator SmoothRotate (Quaternion targetRotation,float duration)
+
+        private IEnumerator SmoothRotate(Quaternion targetRotation, float duration)
         {
-      
-            var  currentDirection  = transform.rotation;
+            var currentDirection = transform.rotation;
             var finalDirection = targetRotation;
             float elapsedTime = 0;
-         
+
             while (elapsedTime < duration)
             {
-                transform.rotation = Quaternion.Lerp(currentDirection,finalDirection,elapsedTime/duration);
+                transform.rotation = Quaternion.Lerp(currentDirection, finalDirection, elapsedTime / duration);
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }

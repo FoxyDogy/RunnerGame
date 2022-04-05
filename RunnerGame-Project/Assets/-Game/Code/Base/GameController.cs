@@ -75,6 +75,7 @@ namespace _Game.Code.Base
             PlayerPrefs.SetString("UserData", json);
             PlayerPrefs.Save();
         }
+
         private UserData LoadUserData()
         {
             if (!PlayerPrefs.HasKey("UserData"))
@@ -87,6 +88,5 @@ namespace _Game.Code.Base
             var userDataJson = PlayerPrefs.GetString("UserData");
             return JsonUtility.FromJson<UserData>(userDataJson);
         }
-        
     }
 }
