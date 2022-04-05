@@ -30,8 +30,7 @@ namespace _Game.Code.Base
 
         private void BootGame()
         {
-            var userData = LoadUserData();
-            Data.currentUserData = userData;
+            SaveUserData();
             onBootGame?.Invoke();
         }
 
@@ -74,19 +73,8 @@ namespace _Game.Code.Base
         {
             var json = JsonUtility.ToJson(Data.currentUserData);
             PlayerPrefs.SetString("UserData", json);
+            PlayerPrefs.Save();
         }
-
-        private UserData LoadUserData()
-        {
-            if (!PlayerPrefs.HasKey("UserData"))
-            {
-                Data.currentUserData = UserData.Defaults();
-                var jsonData = JsonUtility.ToJson(Data.currentUserData);
-                PlayerPrefs.SetString("UserData", jsonData);
-            }
-
-            var userDataJson = PlayerPrefs.GetString("UserData");
-            return JsonUtility.FromJson<UserData>(userDataJson);
-        }
+        
     }
 }

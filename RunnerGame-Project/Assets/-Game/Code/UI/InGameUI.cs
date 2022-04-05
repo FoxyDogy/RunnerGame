@@ -9,7 +9,7 @@ namespace _Game.Code.UI
         public GameObject content;
         public TextMeshProUGUI coinText;
         public TextMeshProUGUI levelText;
-
+        
         private void Awake()
         {
             content.SetActive(false);
@@ -31,7 +31,15 @@ namespace _Game.Code.UI
         private void ShowInGameUI()
         {
             content.SetActive(true);
-            levelText.text = "LEVEL " + (Data.currentUserData.levelNo + 1);
+            if (!Data.currentUserData.endlessMode)
+            {
+                levelText.text = "LEVEL " + (Data.currentUserData.levelNo + 1);
+            }
+            else
+            {
+                levelText.text = "ENDLESS";
+            }
+           
         }
 
         private void HideInGameUI(bool obj)

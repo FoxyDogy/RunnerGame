@@ -47,7 +47,7 @@ namespace _Game.Code.UI
             content.SetActive(true);
             winGroup.SetActive(obj);
             failGroup.SetActive(!obj);
-            if (obj)
+            if (obj || Data.currentUserData.endlessMode)
             {
                 StartCoroutine( CoinAnimation());
                 youEarnLostText.text = "YOU EARN";

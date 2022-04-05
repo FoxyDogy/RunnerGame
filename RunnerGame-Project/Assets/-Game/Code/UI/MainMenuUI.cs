@@ -2,6 +2,8 @@ using _Game.Code.Base;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace _Game.Code.UI
 {
@@ -10,12 +12,21 @@ namespace _Game.Code.UI
         public GameObject content;
         public TextMeshProUGUI levelText;
         public TextMeshProUGUI coinText;
+        public Button endlessButton;
 
         private void Awake()
         {
             content.SetActive(true);
         }
+        private void OnEnable()
+        {
+            GameController.Instance.onBootGameCompleted += RefreshMenu;
+            GameController.Instance.onStartGame += HideMainMenuUI;
+            CoinManager.Instance.onUserCoinUpdate += RefreshMenu;
+            endlessButton.onClick.AddListener(EndlessButtonClick);
+        }
 
+ 
         private void Update()
         {
             if (Data.GameState != GameState.Boot)
@@ -24,18 +35,24 @@ namespace _Game.Code.UI
             if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
                 GameController.Instance.StartGame(); // State Change to Game
         }
-
-        private void OnEnable()
+        private void EndlessButtonClick()
         {
-            GameController.Instance.onBootGame += RefreshMenu;
-            CoinManager.Instance.onUserCoinUpdate += RefreshMenu;
-            GameController.Instance.onStartGame += HideMainMenuUI;
+            var beforeState = Data.currentUserData.endlessMode;
+            Data.currentUserData.endlessMode = !beforeState;
+            GameController.Instance.SaveUserData();
+            SceneManager.LoadScene(0);
+
         }
-
-
         private void RefreshMenu()
         {
-            levelText.text = "LEVEL " + (Data.currentUserData.levelNo + 1);
+            if (!Data.currentUserData.endlessMode)
+            {
+                levelText.text = "LEVEL " + (Data.currentUserData.levelNo + 1);
+            }
+            else
+            {
+                levelText.text = "ENDLESS";
+            }
             coinText.text = Data.currentUserData.coinCount.ToString();
         }
 

@@ -11,6 +11,7 @@ namespace _Game.Code.Base
         public Config config;
         public UserData currentUserData;
         public GameState GameState { get; set; }
+      
 
         public int GetGemValue(int level)
         {
@@ -36,6 +37,7 @@ namespace _Game.Code.Base
     [Serializable]
     public class Config
     {
+  
         public float inputSensitivity = 3;
         public float forwardMovementSpeed = 5;
         public Boundaries movementBoundaries;
@@ -58,7 +60,7 @@ namespace _Game.Code.Base
         public int coinCount;
         public int gemUpgradeLevel;
         public int lifeUpgradeLevel;
-
+        public bool endlessMode;
         public static UserData Defaults()
         {
             var defaultData = new UserData();
@@ -66,6 +68,7 @@ namespace _Game.Code.Base
             defaultData.coinCount = 10;
             defaultData.gemUpgradeLevel = 0;
             defaultData.lifeUpgradeLevel = 0;
+      
             return defaultData;
         }
     }
