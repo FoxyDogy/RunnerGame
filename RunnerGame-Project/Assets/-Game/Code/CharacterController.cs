@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using _Game.Code.Abstract;
 using _Game.Code.Base;
+using _Game.Code.Utils;
 using Foxy.Utils;
 using UnityEngine;
 
@@ -73,7 +74,12 @@ namespace _Game.Code
             LifeCount--;
             onCollideObstacle?.Invoke();
             StartCoroutine(StopMovement());
-            if (lifeCount <= 0) GameController.Instance.EndGame(false);
+            if (lifeCount <= 0)
+            {
+                var endlessMode = PlayerPrefsX.GetBool("endlessMode", false);
+
+                GameController.Instance.EndGame(endlessMode);
+            }
         }
     }
 }

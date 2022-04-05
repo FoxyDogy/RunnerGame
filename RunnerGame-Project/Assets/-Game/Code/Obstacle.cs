@@ -1,5 +1,6 @@
 using System;
 using _Game.Code.Abstract;
+
 using UnityEngine;
 
 namespace _Game.Code
@@ -12,6 +13,7 @@ namespace _Game.Code
         private void Awake()
         {
             collider = GetComponent<Collider>();
+
         }
 
         public void Interact(Action action = null)

@@ -25,31 +25,34 @@ namespace _Game.Code.UI
             content.SetActive(false);
             winGroup.SetActive(false);
             failGroup.SetActive(false);
-                  endlessMode = PlayerPrefsX.GetBool("endlessMode", false);
+            endlessMode = PlayerPrefsX.GetBool("endlessMode", false);
 
         }
 
         private void OnEnable()
         {
-            GameController.Instance.onEndGame += ShowEndGameUI;
+            GameController.Instance.onEndGame += delegate(bool b)
+            {
+                StartCoroutine(ShowEndGameUI(b));
+            }; 
         }
 
         private void ButtonsInit()
         {
             nextLevelButton.onClick.RemoveAllListeners();
             retryLevelButton.onClick.RemoveAllListeners();
-
             nextLevelButton.onClick.AddListener(NextLevelClick);
             retryLevelButton.onClick.AddListener(RetryLevelClick);
         }
 
-        private void ShowEndGameUI(bool obj)
+        private IEnumerator ShowEndGameUI(bool obj)
         {
+            yield return new WaitForSeconds(1);
             sessionCoinText.text = CoinManager.Instance.SessionCoinCount.ToString();
             userCoinText.text = CoinManager.Instance.UserCoinCount.ToString();
             content.SetActive(true);
-            winGroup.SetActive(obj || endlessMode);
-            failGroup.SetActive(!(obj || endlessMode));
+            winGroup.SetActive(obj);
+            failGroup.SetActive(!obj);
             if (obj || endlessMode)
             {
                 StartCoroutine( CoinAnimation());
@@ -59,7 +62,6 @@ namespace _Game.Code.UI
             {
                 youEarnLostText.text = "YOU LOST";
             }
-             
         }
 
         private IEnumerator CoinAnimation()
@@ -70,7 +72,6 @@ namespace _Game.Code.UI
             userCoinText.GetComponent<NumberCounter>().SetNumber(userCoinTargetNumber,0.5f);
             yield return new WaitForSeconds(1.5f);
             StartCoroutine(FadeSessionCoins(0, 1));
-
         }
 
         private IEnumerator FadeSessionCoins(float end, float duration)
